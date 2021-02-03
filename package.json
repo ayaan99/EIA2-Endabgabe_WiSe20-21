@@ -1,0 +1,22 @@
+{
+  "name": "eia2-endabgabe_wise20-21",
+  "version": "1.0.0",
+  "description": "rocket-maker",
+  "main": "Particle.js",
+  "dependencies": {},
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ayaan99/EIA2-Endabgabe_WiSe20-21.git"
+  },
+  "author": "ayaan99",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ayaan99/EIA2-Endabgabe_WiSe20-21/issues"
+  },
+  "homepage": "https://github.com/ayaan99/EIA2-Endabgabe_WiSe20-21#readme"
+}
