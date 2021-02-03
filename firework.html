@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>firework</title>
+        <link rel="stylesheet" href="firework.css">
+        <link rel="stylesheet" href="https://use.typekit.net/elz2clv.css">
+        <script src="firework.js"></script>
+</head>
+<body id="page">
+    <h1 id="title">Rocket - Maker</h1>
+    <fieldset id="create">
+        <legend>Create your own rocket:</legend>
+        
+        <form id="form" method="GET">
+            <p>name:</p>
+            <input type="text" name="rocketName" placeholder="This rocket is called...">
+            
+            <p>particle shape:</p>
+            <input type="radio" name="shape" id="circle" value="Circle" checked>
+            <label for="circle">circles</label>
+            <input type="radio" name="shape" id="rectangle" value="Rectangle">
+            <label for="rectangle">rectangles</label>
+            <input type="radio" name="shape" id="triangle" value="Triangle">
+            <label for="triangle">triangles</label>
+            
+            <p>amount of particles:</p>
+            <input type="number" name="amount" id="Amount" step="1" min="1" value="1">
+            
+            <p>lifetime of particles [in seconds]:</p>
+            <input type="number" name="lifetime" id="Lifetime" step="1" min="1" value="1">
+            
+            <p>radius of explosion:</p>
+            <input type="number" name="radius" id="Radius" step="1" min="1" value="1">
+            
+            <p>colors of particles:</p>
+            <div id="colorPalette">
+                <input type="color" name="color" value="#d68aff">
+            </div>
+            <button type="button" id="addColor">add color</button>
+            
+            <br>
+            <br>
+            <button type="button" id="showResult">show result</button>
+            
+            <button type="submit" id="submit">save</button>
+            
+            <button type="button" id="showtime">SHOWTIME</button>
+        </form>
+    </fieldset>
+    
+    <fieldset id="show">
+        <legend>That's how your rocket will look like:</legend>
+        <canvas id="result"></canvas>
+    </fieldset>
+    
+    <fieldset id="stored">
+        <legend>Gallery:</legend>
+        <div id="gallery">
+            <p>You didn't save any rockets yet...</p>
+        </div>
+    </fieldset>
+</body>
+</html>
