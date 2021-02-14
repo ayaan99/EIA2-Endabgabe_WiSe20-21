@@ -14,7 +14,8 @@ export namespace Final_Firework {
         port = 5001;
         
     // let databaseUrl: string = "mongodb://localhost:27017";
-    let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    // let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketMaker?retryWrites=true&w=majority";
     
     startServer(port);
     connectToDatabase(databaseUrl);
@@ -98,7 +99,7 @@ export namespace Final_Firework {
     
     //speichert Rocket in Datenbank ab
     function storeRocket(_rocket: Rocket, _response: Http.ServerResponse): void {
-        rockets.insertOne(_rocket);
+        rockets.insert(_rocket);
         _response.end();
     }
     
