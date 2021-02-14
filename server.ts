@@ -13,8 +13,8 @@ export namespace Final_Firework {
     if (port == undefined)
         port = 5001;
         
-    let databaseUrl: string = "mongodb://localhost:27017";
-    //let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    // let databaseUrl: string = "mongodb://localhost:27017";
+    let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
     
     startServer(port);
     connectToDatabase(databaseUrl);

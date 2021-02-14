@@ -21,8 +21,8 @@ namespace Final_Firework {
     export let gravity: number = 0.05;
     export let friction: number = 0.99;
     
-    let url: string = "http://localhost:5001/";
-    // let url: string = "https://rocket-maker.herokuapp.com/";
+    // let url: string = "http://localhost:5001/";
+    let url: string = "https://rocket-maker.herokuapp.com/";
     
     async function handleLoad(): Promise<void> {
         console.log("start");
