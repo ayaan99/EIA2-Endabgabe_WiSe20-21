@@ -14,8 +14,8 @@ export namespace Final_Firework {
         port = 5001;
         
     // let databaseUrl: string = "mongodb://localhost:27017";
-    // let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
-    let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketMaker?retryWrites=true&w=majority";
+    let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    // let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketMaker?retryWrites=true&w=majority";
     
     startServer(port);
     connectToDatabase(databaseUrl);
