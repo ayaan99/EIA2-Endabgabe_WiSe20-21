@@ -13,8 +13,8 @@ var Final_Firework;
     let particles = [];
     Final_Firework.gravity = 0.05;
     Final_Firework.friction = 0.99;
-    let url = "http://localhost:5001/";
-    // let url: string = "https://rocket-maker.herokuapp.com/";
+    // let url: string = "http://localhost:5001/";
+    let url = "https://rocket-maker.herokuapp.com/";
     async function handleLoad() {
         console.log("start");
         let response = await fetch(url + "?" + "command=getNames");

@@ -10,8 +10,9 @@ var Final_Firework;
     let port = process.env.PORT;
     if (port == undefined)
         port = 5001;
-    let databaseUrl = "mongodb://localhost:27017";
-    //let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    // let databaseUrl: string = "mongodb://localhost:27017";
+    let databaseUrl = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketName";
+    // let databaseUrl: string = "mongodb+srv://Nutzer1:nutzer1@eia2.bg79w.mongodb.net/RocketMaker?retryWrites=true&w=majority";
     startServer(port);
     connectToDatabase(databaseUrl);
     function startServer(_port) {
@@ -80,7 +81,7 @@ var Final_Firework;
     }
     //speichert Rocket in Datenbank ab
     function storeRocket(_rocket, _response) {
-        rockets.insertOne(_rocket);
+        rockets.insert(_rocket);
         _response.end();
     }
     // alle rockets in der collection löschen
