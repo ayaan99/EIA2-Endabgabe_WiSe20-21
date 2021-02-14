@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>firework</title>
+        <link rel="stylesheet" href="firework.css">
+        <link rel="stylesheet" href="https://use.typekit.net/elz2clv.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+        <script src="GenerateContent/generateGallery.js"></script>
+        <script src="GenerateContent/generateSidebar.js"></script>
+        <script src="Particle/Particle.js"></script>
+        <script src="Shapes/Circle.js"></script>
+        <script src="Shapes/Rectangle.js"></script>
+        <script src="Shapes/Triangle.js"></script>
+        <script src="Main/firework.js"></script>
+</head>
+<body id="page">
+    <h1 id="title">Rocket - Maker</h1>
+    <fieldset id="create">
+        <legend>Create your own rocket:</legend>
+        
+        <form id="form" method="GET">
+            <p>name:</p>
+            <input type="text" name="rocketName" placeholder="This rocket is called...">
+            
+            <p>particle shape:</p>
+            <input type="radio" name="shape" id="circle" value="Circle" checked>
+            <label for="circle">circles</label>
+            <input type="radio" name="shape" id="rectangle" value="Rectangle">
+            <label for="rectangle">rectangles</label>
+            <input type="radio" name="shape" id="triangle" value="Triangle">
+            <label for="triangle">triangles</label>
+
+            <div id="input">
+                <p id="info">radius of particles:</p>
+                <input type="number" name="radius" id="Radius" step="1" min="1" value="3">
+            </div>
+            
+            <p>amount of particles:</p>
+            <input type="number" name="amount" id="Amount" step="1" min="1" value="100">
+            
+            <p>colors of particles:</p>
+            <div id="colorPalette">
+                <input type="color" name="color" value="#d68aff">
+            </div>
+            <button type="button" id="addColor">add color</button>
+            
+            <br>
+            <br>
+            
+            <button type="submit" id="submit">save</button>
+            
+            <button type="submit" id="showtime">Showtime</button>
+        </form>
+    </fieldset>
+    
+    <fieldset id="show">
+        <legend>That's how your rocket will look like:</legend>
+        <canvas id="result"></canvas>
+    </fieldset>
+    
+    <fieldset id="stored">
+        <legend>Gallery:</legend>
+        <button id="deleteGallery">delete gallery</button>
+    </fieldset>
+</body>
+</html>

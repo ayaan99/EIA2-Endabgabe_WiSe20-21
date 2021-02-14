@@ -3,7 +3,10 @@
   "version": "1.0.0",
   "description": "rocket-maker",
   "main": "Particle.js",
-  "dependencies": {},
+  "dependencies": {
+    "@types/mongodb": "^3.6.5",
+    "mongodb": "^3.6.4"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
