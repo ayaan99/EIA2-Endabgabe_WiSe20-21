@@ -1,6 +1,6 @@
 animation_test
 firework_test
-node_modules
+00_node_modules
 02_MongoDB
 03_Database
 *.svg
