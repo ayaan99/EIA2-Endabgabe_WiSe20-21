@@ -47,14 +47,14 @@ export namespace Final_Firework {
             let command: string | string[] | undefined = url.query["command"];
             
             switch (command) {
-                case "deleteAll":
-                    deleteAll(_request, _response);
+                case "getNames":
+                    getNames(_request, _response);
                     break;
                 case "getRocket":
                     getRocket(_request, _response);
                     break;
-                case "getNames":
-                    getNames(_request, _response);
+                case "deleteAll":
+                    deleteAll(_request, _response);
                     break;
                 case "deleteRocket":
                     deleteRocket(_request, _response);
@@ -111,7 +111,7 @@ export namespace Final_Firework {
     }
 
     //gezielt eine Rocket löschen:
-    async function deleteRocket(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
+    function deleteRocket(_request: Http.IncomingMessage, _response: Http.ServerResponse): void {
         let url: Url.UrlWithParsedQuery = Url.parse(_request.url, true);
         let rocketName: string | string [] | undefined = url.query["rocketName"];
         rockets.deleteOne({ "rocketName": rocketName });

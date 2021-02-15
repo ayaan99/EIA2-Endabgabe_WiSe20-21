@@ -34,14 +34,14 @@ var Final_Firework;
             let url = Url.parse(_request.url, true);
             let command = url.query["command"];
             switch (command) {
-                case "deleteAll":
-                    deleteAll(_request, _response);
+                case "getNames":
+                    getNames(_request, _response);
                     break;
                 case "getRocket":
                     getRocket(_request, _response);
                     break;
-                case "getNames":
-                    getNames(_request, _response);
+                case "deleteAll":
+                    deleteAll(_request, _response);
                     break;
                 case "deleteRocket":
                     deleteRocket(_request, _response);
@@ -92,7 +92,7 @@ var Final_Firework;
         _response.end();
     }
     //gezielt eine Rocket löschen:
-    async function deleteRocket(_request, _response) {
+    function deleteRocket(_request, _response) {
         let url = Url.parse(_request.url, true);
         let rocketName = url.query["rocketName"];
         rockets.deleteOne({ "rocketName": rocketName });
