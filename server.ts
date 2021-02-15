@@ -84,7 +84,6 @@ export namespace Final_Firework {
         let nameList: string = JSON.stringify(allNamesString);
         _response.write(nameList);
         _response.end();
-
     }
 
     //Daten einer Rocket erhalten:

@@ -7,7 +7,7 @@ namespace Final_Firework {
             this.size = size;
         }
 
-        draw(): void {
+        public draw(): void {
             //triangle
             crc.save();
             crc.beginPath();

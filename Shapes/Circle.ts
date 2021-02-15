@@ -7,7 +7,7 @@ namespace Final_Firework {
             this.radius = radius;
         }
 
-        draw(): void {
+        public draw(): void {
             // circle
             crc.save(); 
             crc.globalAlpha = 1;

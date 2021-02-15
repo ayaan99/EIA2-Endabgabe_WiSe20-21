@@ -15,7 +15,7 @@ namespace Final_Firework {
             this.opacity = 1;
         }
 
-        draw(): void {
+        public draw(): void {
             //different shape defined in sub classes
         }
 

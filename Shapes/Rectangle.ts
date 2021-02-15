@@ -9,7 +9,7 @@ namespace Final_Firework {
             this.height = height;
         }
 
-        draw(): void {
+        public draw(): void {
              //rectangle
             crc.save();
             crc.beginPath();

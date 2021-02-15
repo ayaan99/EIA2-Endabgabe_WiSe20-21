@@ -87,7 +87,8 @@ var Final_Firework;
     function shootSelected(_event) {
         let mouseX = _event.clientX;
         let mouseY = _event.clientY;
-        //vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
+        // Übergabe der  Daten aus dem Js-Objekt...
+        // vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
         amount = 300;
         colors = ["white", "lightgray"];
         radius = 3;

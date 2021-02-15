@@ -110,11 +110,11 @@ namespace Final_Firework {
 
     //Abschießen der Rocket auf der Showtime-Page
     function shootSelected(_event: MouseEvent): void {
-        
         let mouseX: number = _event.clientX;
         let mouseY: number = _event.clientY;
 
-        //vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
+        // Übergabe der  Daten aus dem Js-Objekt...
+        // vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
         amount = 300;
         colors = ["white", "lightgray"];
         radius = 3;
@@ -127,7 +127,6 @@ namespace Final_Firework {
     //     // amount = _data[0].amount;
     //     // color = _data[0].color;
     //     // shape = _data[0].shape;
-
     //     // console.log(_data);
     // }
 
@@ -164,7 +163,7 @@ namespace Final_Firework {
     //Abschießen der Rocket im Test-Bereich:
     function shootRocket(_event: MouseEvent): void {
         let formData: FormData = new FormData(document.forms[0]);
-
+        
         let mouseX: number = _event.clientX;
         let mouseY: number = _event.clientY;
         let color: string;
