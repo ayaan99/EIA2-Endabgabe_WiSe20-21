@@ -1,11 +1,11 @@
 namespace Final_Firework {
 
     export class Particle {
-        x: number;
-        y: number;
-        velocity: Vector;
-        color: string;
-        opacity: number;
+        public x: number;
+        public y: number;
+        public velocity: Vector;
+        public color: string;
+        public opacity: number;
 
         constructor(x: number, y: number, color: string, velocity: Vector) {
             this.x = x;
@@ -19,7 +19,7 @@ namespace Final_Firework {
             //different shape defined in sub classes
         }
 
-        move(): void {
+        public move(): void {
             this.draw();
             this.velocity.x *= friction;
             this.velocity.y *= friction;

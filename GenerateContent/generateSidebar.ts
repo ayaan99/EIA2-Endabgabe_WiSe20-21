@@ -26,12 +26,15 @@ namespace Final_Firework {
             let rocketBtn: HTMLButtonElement = document.createElement("button");
             rocketBtn.type = "button";
             rocketBtn.id = "rocketBtn";
-            // rocketBtn.setAttribute("class", "rocketBtn");
+            rocketBtn.value = name.rocketName;
+            rocketBtn.setAttribute("class", "rocketBtn");
             rocketBtn.innerHTML = name.rocketName;
 
             if (name.rocketName == "") {
                 rocketBtn.innerHTML = "no name yet :(";
             }
+
+            rocketBtn.addEventListener("click", getRocket);
 
             span.appendChild(rocketBtn);
             group.appendChild(span);

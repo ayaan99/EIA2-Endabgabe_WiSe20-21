@@ -2,7 +2,12 @@ namespace Final_Firework {
     export interface Rocket {
         rocketName: string;
         amount: number;
-        color: string;
+        colors: string[];
+        shape: string;
+        radius: number;
+        width: number;
+        height: number;
+        size: number;
     }
     
     export function generateGallery(_data: Rocket[]): void {
@@ -36,8 +41,11 @@ namespace Final_Firework {
             let deleteBtn: HTMLButtonElement = document.createElement("button");
             deleteBtn.type = "button";
             deleteBtn.id = "deleteBtn";
-            // deleteBtn.setAttribute("class", "deleteBtn");
-            deleteBtn.innerHTML = "<i class='fa fa-trash' aria-hidden='true' id='trash'></i>";
+            deleteBtn.value = name.rocketName;
+            deleteBtn.setAttribute("class", "deleteBtn");
+            deleteBtn.innerHTML = "delete";
+
+            deleteBtn.addEventListener("click", deleteRocket);
             span.appendChild(deleteBtn);
 
             group.appendChild(span);

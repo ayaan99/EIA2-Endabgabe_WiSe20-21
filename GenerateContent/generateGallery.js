@@ -26,8 +26,10 @@ var Final_Firework;
             let deleteBtn = document.createElement("button");
             deleteBtn.type = "button";
             deleteBtn.id = "deleteBtn";
-            // deleteBtn.setAttribute("class", "deleteBtn");
-            deleteBtn.innerHTML = "<i class='fa fa-trash' aria-hidden='true' id='trash'></i>";
+            deleteBtn.value = name.rocketName;
+            deleteBtn.setAttribute("class", "deleteBtn");
+            deleteBtn.innerHTML = "delete";
+            deleteBtn.addEventListener("click", Final_Firework.deleteRocket);
             span.appendChild(deleteBtn);
             group.appendChild(span);
         }

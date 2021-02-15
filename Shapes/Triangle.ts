@@ -1,6 +1,6 @@
 namespace Final_Firework {
     export class Triangle extends Particle {
-        size: number;
+        private size: number;
 
         constructor(x: number, y: number, color: string, velocity: Vector, size: number) {
             super(x, y, color, velocity);

@@ -31,7 +31,7 @@ span[name="rocketBtn"] {
     
 }
 
-#deleteBtn:hover {
+.deleteBtn:hover {
     color: red;
 }
 
@@ -82,15 +82,14 @@ button:hover {
     cursor: pointer;
 }
 
-#showtime {
+#showtime, #surprise {
     font-family: ccmonstermashworn,sans-serif;
     font-size: 20px;
     letter-spacing: 2px;
 }
 
 #showtime:hover {
-    background-color: yellow;
-    color: black;
+    background-image: linear-gradient(to right, yellow, orange, red);
 }
 
 #show {
@@ -147,5 +146,5 @@ a {
 
 a:hover {
     color: black;
-    background-color: white;
+    background-image: linear-gradient(to right, rgb(255, 255, 166), rgb(255, 209, 124), rgb(255, 155, 155));
 }

@@ -6,10 +6,9 @@ namespace Final_Firework {
         y: number;
     }
     
-    // let rocketName: string;
     let amount: number;
-    let color: string;
-    // let colors: string[];
+    let colors: string[] = [];
+    // let shape: string;
     let radius: number;
     let width: number;
     let height: number;
@@ -25,8 +24,8 @@ namespace Final_Firework {
     let url: string = "https://rocket-maker.herokuapp.com/";
     
     async function handleLoad(): Promise<void> {
-        console.log("start");
         
+        //Galerie mit Rocket-Namen generieren:
         let response: Response = await fetch(url + "?" + "command=getNames");
         let nameList: string = await response.text();
         let names: Rocket[] = JSON.parse(nameList);
@@ -43,9 +42,7 @@ namespace Final_Firework {
         let submit: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#submit");
         let showtime: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#showtime");
         let gallery: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#deleteGallery");
-        // let rocket: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#rocketBtn");
-        // let deleteBtn: HTMLButtonElement = <HTMLButtonElement>document.querySelector("#deleteBtn");
-
+        
         let circle: HTMLInputElement = <HTMLInputElement>document.querySelector("input#circle");
         let rectangle: HTMLInputElement = <HTMLInputElement>document.querySelector("input#rectangle");
         let triangle: HTMLInputElement = <HTMLInputElement>document.querySelector("input#triangle");
@@ -55,17 +52,14 @@ namespace Final_Firework {
         showtime.addEventListener("click", loadShowTime);
         canvasRes.addEventListener("click", shootRocket);
         gallery.addEventListener("click", deleteGallery);
-        // rocket.addEventListener("click", getRocket);
-        // canvasShow.addEventListener("click", shootRocket);
-        // deleteBtn.addEventListener("click", deleteRocket);
-
+        
         circle.addEventListener("click", changeInputC);
         rectangle.addEventListener("click", changeInputR);
         triangle.addEventListener("click", changeInputT);
         addColor.addEventListener("click", addColorInput);
     }
     window.setInterval(animate, 20);
-        
+
     //Absenden der Daten:
     async function sendRocket(_event: MouseEvent): Promise<void> {
         let formData: FormData = new FormData(document.forms[0]);
@@ -75,51 +69,85 @@ namespace Final_Firework {
         alert("You can now find your rocket in the gallery!" + responseText.replace(/<br>/g, " "));
     }
 
-    //Wechsel zu Showtime-Page:
-    async function loadShowTime(): Promise<void> {
+    //Wechsel zur Showtime-Page:
+    async function loadShowTime(_event: MouseEvent): Promise<void> {
         let body: HTMLElement = <HTMLElement>document.querySelector("body#page");
         
         body.innerHTML = " "; 
         body.style.display = "block";
         body.style.backgroundColor = "black";
         body.innerHTML += "<h1 id='title2'>Showtime</h1>";
-        body.innerHTML += "<canvas id='result'></canvas>";
-        body.innerHTML += "<div id='sidebar'><a id='return' href= 'rocketMaker.html'>create more rockets</div>";
+        body.innerHTML += "<canvas id='final'></canvas>";
+        body.innerHTML += "<div id='sidebar'>" + "<a id='return' href= 'rocketMaker.html'>create more rockets</a>" + "</div>";
+        
+        let canvas: HTMLCanvasElement | null = document.querySelector("canvas#final");
+        if (!canvas)
+        return;
+        crc = <CanvasRenderingContext2D>canvas.getContext("2d");
+        
+        canvas.width = window.outerWidth;
+        canvas.height = window.innerHeight;
+
+        canvas.addEventListener("click", shootSelected);
 
         let response: Response = await fetch(url + "?" + "command=getNames");
         let nameList: string = await response.text();
         let names: Rocket[] = JSON.parse(nameList);
         generateSidebar(names);
-
-        // let rocket: HTMLButtonElement = <HTMLButtonElement>document.querySelector("button#rocketBtn");
-        // rocket.addEventListener("click", getRocket);
-        //shootRocket();
     }
 
-    // async function getRocket(): Promise<void> {
-    //     let response: Response = await fetch(url + "?" + "command=getRockets");
-    //     let responseText: string = await response.text();
-    //     let Data: Rocket[] = JSON.parse(responseText);
-    //     !!filter die Rocket raus die selected wurde
+    //Gezieltes Abfragen der Rocket-Daten:
+    export async function getRocket(_event: MouseEvent): Promise<void> {
+        let target: HTMLButtonElement = <HTMLButtonElement>_event.target;
+        let btnValue: string = target.value;
+        let response: Response = await fetch(url + "?" + "command=getRocket&rocketName=" + btnValue);
+        let data: string = await response.text();
+        data = JSON.parse(data);
 
-    //     shootRocket(selectedRocket)
+        console.log(data); 
+        // getData(data);
+    }
+
+    //Abschießen der Rocket auf der Showtime-Page
+    function shootSelected(_event: MouseEvent): void {
+        
+        let mouseX: number = _event.clientX;
+        let mouseY: number = _event.clientY;
+
+        //vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
+        amount = 300;
+        colors = ["white", "lightgray"];
+        radius = 3;
+        
+        createCircle(mouseX, mouseY, amount, colors, radius);
+    }
+
+    //Rausziehen der Values aus dem Js-Objekt:
+    // function getData(_data: string): void {
+    //     // amount = _data[0].amount;
+    //     // color = _data[0].color;
+    //     // shape = _data[0].shape;
+
+    //     // console.log(_data);
     // }
 
     //Löschen der gesamten Galerie:
-    async function deleteGallery(): Promise<void> {
+    async function deleteGallery(_event: MouseEvent): Promise<void> {
         let response: Response = await fetch(url + "?" + "command=deleteAll");
         let responseText: string = await response.text();
         alert(responseText);
     }
 
     //Löschen einer Rocket:
-    // async function deleteRocket(): Promise<void> {
-    //     let response: Response = await fetch(url + "?" + "command=deleteRocket&rocketName=" + rocketName);
-    //     let responseText: string = await response.text();
-    //     alert(responseText);
-    //  }   
+    export async function deleteRocket(_event: MouseEvent): Promise<void> {
+        let target: HTMLButtonElement = <HTMLButtonElement>_event.target;
+        let btnValue: string = target.value;
+        let response: Response = await fetch(url + "?" + "command=deleteRocket&rocketName=" + btnValue);
+        let responseText: string = await response.text();
+        alert(responseText);
+     }   
 
-    //Parikelanimation:
+    //Animation der Partikel:
     function animate(): void {
         crc.fillStyle = "rgba(0, 0, 0, 0.05)";
         crc.fillRect(0, 0, crc.canvas.width, crc.canvas.height);
@@ -133,74 +161,81 @@ namespace Final_Firework {
         }
     }   
 
+    //Abschießen der Rocket im Test-Bereich:
     function shootRocket(_event: MouseEvent): void {
         let formData: FormData = new FormData(document.forms[0]);
 
         let mouseX: number = _event.clientX;
         let mouseY: number = _event.clientY;
+        let color: string;
 
         for (let entry of formData) {
             amount = Number(formData.get("amount"));
             color = String(formData.get("color"));
+            colors.push(color);
 
             switch (entry[1]) {
                 case "Circle":
                     radius = Number(formData.get("radius"));  
-                    createCircle(mouseX, mouseY, amount, color, radius);
+                    createCircle(mouseX, mouseY, amount, colors, radius);
                     break;
                 case "Rectangle":
                     width = Number(formData.get("width"));
                     height = Number(formData.get("height"));
-                    createRectangle(mouseX, mouseY, amount, color, width, height);
+                    createRectangle(mouseX, mouseY, amount, colors, width, height);
                     break;
                 case "Triangle":
                     size = Number(formData.get("size"));
-                    createTriangle(mouseX, mouseY, amount, color, size);
+                    createTriangle(mouseX, mouseY, amount, colors, size);
                     break;
             }
         } 
     }
 
-    function createCircle(_mouseX: number, _mouseY: number, _amount: number, _color: string, _radius: number): void {
-        let color: string = _color;
+    //Erzeugung der verschiedenen Formen:
+    function createCircle(_mouseX: number, _mouseY: number, _amount: number, _color: string[], _radius: number): void {
+        let color: string[] = _color;
         let radian: number = (Math.PI * 2) / _amount;
         let power: number = 14;
 
         for (let i: number = 0; i < _amount; i++) {
+            let random: number = Math.floor(Math.random() * colors.length);
             let velX: number = Math.cos(radian * i) * (Math.random() * power);
             let velY: number = Math.sin(radian * i) * (Math.random() * power);
             
-            particles.push(new Circle(_mouseX, _mouseY, color, { x: velX, y: velY }, _radius));
+            particles.push(new Circle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _radius));
         }
     }
 
-    function createRectangle(_mouseX: number, _mouseY: number, _amount: number, _color: string, _width: number, _height: number): void {
-        let color: string = _color;
+    function createRectangle(_mouseX: number, _mouseY: number, _amount: number, _color: string[], _width: number, _height: number): void {
+        let color: string[] = _color;
         let radian: number = (Math.PI * 2) / _amount;
         let power: number = 14;
 
         for (let i: number = 0; i < _amount; i++) {
+            let random: number = Math.floor(Math.random() * colors.length);
             let velX: number = Math.cos(radian * i) * (Math.random() * power);
             let velY: number = Math.sin(radian * i) * (Math.random() * power);
             
-            particles.push(new Rectangle(_mouseX, _mouseY, color, { x: velX, y: velY }, _width, _height));
+            particles.push(new Rectangle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _width, _height));
         }
     }
 
-    function createTriangle(_mouseX: number, _mouseY: number, _amount: number, _color: string, _size: number): void {
-        let color: string = _color;
+    function createTriangle(_mouseX: number, _mouseY: number, _amount: number, _color: string[], _size: number): void {
+        let color: string[] = _color;
         let radian: number = (Math.PI * 2) / _amount;
         let power: number = 14;
 
         for (let i: number = 0; i < _amount; i++) {
+            let random: number = Math.floor(Math.random() * colors.length);
             let velX: number = Math.cos(radian * i) * (Math.random() * power);
             let velY: number = Math.sin(radian * i) * (Math.random() * power);
             
-            particles.push(new Triangle(_mouseX, _mouseY, color, { x: velX, y: velY }, _size));
+            particles.push(new Triangle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _size));
         }
     }
 
-    //Änderungen innerhalb des Formulars:
+    //Dynamische Änderungen innerhalb des Formulars:
     function changeInputC(_event: MouseEvent): void {
         let input: HTMLDivElement = <HTMLDivElement>document.querySelector("div#input");
         input.innerHTML = "<p>radius of particles:</p>";
@@ -221,7 +256,7 @@ namespace Final_Firework {
         input.innerHTML += "<input type='number' name='size' id='Size' step='1' min='1' value='3'>";
     }
     
-    function addColorInput(): void {
+    function addColorInput(_event: MouseEvent): void {
         let colorPalette: HTMLDivElement = <HTMLDivElement>document.querySelector("div#colorPalette");
         colorPalette.innerHTML += "<input type='color' name='color' value='#d68aff'>";
     }

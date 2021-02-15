@@ -1,6 +1,6 @@
 namespace Final_Firework {
     export class Circle extends Particle {
-        radius: number;
+        private radius: number;
 
         constructor(x: number, y: number, color: string, velocity: Vector, radius: number) {
             super(x, y, color, velocity);

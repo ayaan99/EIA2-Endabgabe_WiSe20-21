@@ -1,7 +1,7 @@
 namespace Final_Firework {
     export class Rectangle extends Particle {
-        width: number;
-        height: number;
+        private width: number;
+        private height: number;
 
         constructor(x: number, y: number, color: string, velocity: Vector, width: number, height: number) {
             super(x, y, color, velocity);
