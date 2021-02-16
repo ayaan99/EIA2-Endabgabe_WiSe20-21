@@ -8,7 +8,6 @@ namespace Final_Firework {
     
     let amount: number;
     let colors: string[] = [];
-    // let shape: string;
     let radius: number;
     let width: number;
     let height: number;
@@ -25,7 +24,7 @@ namespace Final_Firework {
     
     async function handleLoad(): Promise<void> {
         
-        //Galerie mit Rocket-Namen generieren:
+        //Galerie mit Rocket-Namen generieren: (Dieser Teil wurde mithilfe des Codes von Sarah Franke erarbeitet)
         let response: Response = await fetch(url + "?" + "command=getNames");
         let nameList: string = await response.text();
         let names: Rocket[] = JSON.parse(nameList);

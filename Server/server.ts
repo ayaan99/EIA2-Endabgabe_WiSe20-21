@@ -76,10 +76,10 @@ export namespace Final_Firework {
         _response.end();
     }
 
-    //rocketNames für generateGallery und generateSidbar bekommen:
+    //rocketNames für generateGallery und generateSidbar erhalten: 
+    //(Dieser Teil wurde mithilfe des Codes von Sarah Franke erarbeitet)
     async function getNames(_request: Http.IncomingMessage, _response: Http.ServerResponse): Promise<void> {
-        let allNames: Mongo.Cursor<any> = rockets.find({}, { projection: { _id: 0, rocketName: 1 } }); 
-        //_id: 0, damit es nicht zurückgegeben wird; 
+        let allNames: Mongo.Cursor<any> = rockets.find({}, { projection: { _id: 0, rocketName: 1 } });
         let allNamesString: string[] = await allNames.toArray();
         let nameList: string = JSON.stringify(allNamesString);
         _response.write(nameList);
