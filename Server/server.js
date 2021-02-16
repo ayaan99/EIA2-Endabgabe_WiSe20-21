@@ -61,10 +61,10 @@ var Final_Firework;
         }
         _response.end();
     }
-    //rocketNames für generateGallery und generateSidbar bekommen:
+    //rocketNames für generateGallery und generateSidbar erhalten: 
+    //(Dieser Teil wurde mithilfe des Codes von Sarah Franke erarbeitet)
     async function getNames(_request, _response) {
         let allNames = rockets.find({}, { projection: { _id: 0, rocketName: 1 } });
-        //_id: 0, damit es nicht zurückgegeben wird; 
         let allNamesString = await allNames.toArray();
         let nameList = JSON.stringify(allNamesString);
         _response.write(nameList);

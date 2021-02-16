@@ -4,7 +4,6 @@ var Final_Firework;
     window.addEventListener("load", handleLoad);
     let amount;
     let colors = [];
-    // let shape: string;
     let radius;
     let width;
     let height;
@@ -15,7 +14,7 @@ var Final_Firework;
     // let url: string = "http://localhost:5001/";
     let url = "https://rocket-maker.herokuapp.com/";
     async function handleLoad() {
-        //Galerie mit Rocket-Namen generieren:
+        //Galerie mit Rocket-Namen generieren: (Dieser Teil wurde mithilfe des Codes von Sarah Franke erarbeitet)
         let response = await fetch(url + "?" + "command=getNames");
         let nameList = await response.text();
         let names = JSON.parse(nameList);
