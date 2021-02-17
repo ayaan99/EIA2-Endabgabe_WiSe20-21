@@ -4,6 +4,7 @@ var Final_Firework;
     window.addEventListener("load", handleLoad);
     let amount;
     let colors = [];
+    let shape;
     let radius;
     let width;
     let height;
@@ -65,7 +66,7 @@ var Final_Firework;
         Final_Firework.crc = canvas.getContext("2d");
         canvas.width = window.outerWidth;
         canvas.height = window.innerHeight;
-        canvas.addEventListener("click", shootSelected);
+        // canvas.addEventListener("click", shootSelected);
         let response = await fetch(url + "?" + "command=getNames");
         let nameList = await response.text();
         let names = JSON.parse(nameList);
@@ -77,29 +78,74 @@ var Final_Firework;
         let btnValue = target.value;
         let response = await fetch(url + "?" + "command=getRocket&rocketName=" + btnValue);
         let data = await response.text();
-        data = JSON.parse(data);
-        console.log(data);
-        // getData(data);
+        let rocket = JSON.parse(data);
+        shootSelected(rocket);
     }
     Final_Firework.getRocket = getRocket;
-    //Abschießen der Rocket auf der Showtime-Page
-    function shootSelected(_event) {
-        let mouseX = _event.clientX;
-        let mouseY = _event.clientY;
+    //Abschießen der Rocket auf der Showtime-Page:
+    //***(Dieser Teil wurde am 16.02.21 um 19:11 erarbeitet)***
+    function shootSelected(_rocket) {
+        // vorrübergehend statische Werte für Partikel-Position, weil EventListener nicht funktioniert
+        let mouseX = Math.floor(Math.random() * window.innerWidth);
+        let mouseY = Math.floor(Math.random() * window.innerHeight);
         // Übergabe der  Daten aus dem Js-Objekt...
-        // vorrübergehend statische Werte, weil Daten der ausgewählten Rockets noch nicht korrekt verarbeitet werden
-        amount = 300;
-        colors = ["white", "lightgray"];
-        radius = 3;
-        createCircle(mouseX, mouseY, amount, colors, radius);
+        for (let data of _rocket) {
+            amount = data.amount;
+            shape = data.shape;
+            let randomHue = Math.random() * 360;
+            colors = ["hsl(" + randomHue + ", 100%, 50%)"];
+            // let color: string = data.colors; --> colors werden als 'undefinded' übergeben
+            switch (shape) {
+                case "Circle":
+                    radius = data.radius;
+                    createFireworkC(mouseX, mouseY, amount, colors, radius);
+                    break;
+                case "Rectangle":
+                    width = data.width;
+                    height = data.height;
+                    createFireworkR(mouseX, mouseY, amount, colors, width, height);
+                    break;
+                case "Triangle":
+                    size = data.size;
+                    createFireworkT(mouseX, mouseY, amount, colors, size);
+                    break;
+            }
+        }
     }
-    //Rausziehen der Values aus dem Js-Objekt:
-    // function getData(_data: string): void {
-    //     // amount = _data[0].amount;
-    //     // color = _data[0].color;
-    //     // shape = _data[0].shape;
-    //     // console.log(_data);
-    // }
+    function createFireworkC(_mouseX, _mouseY, _amount, _color, _radius) {
+        let color = _color;
+        let radian = (Math.PI * 2) / _amount;
+        let power = 14;
+        for (let i = 0; i < _amount; i++) {
+            let random = Math.floor(Math.random() * colors.length);
+            let velX = Math.cos(radian * i) * (Math.random() * power);
+            let velY = Math.sin(radian * i) * (Math.random() * power);
+            particles.push(new Final_Firework.Circle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _radius));
+        }
+    }
+    function createFireworkR(_mouseX, _mouseY, _amount, _color, _width, _height) {
+        let color = _color;
+        let radian = (Math.PI * 2) / _amount;
+        let power = 14;
+        for (let i = 0; i < _amount; i++) {
+            let random = Math.floor(Math.random() * colors.length);
+            let velX = Math.cos(radian * i) * (Math.random() * power);
+            let velY = Math.sin(radian * i) * (Math.random() * power);
+            particles.push(new Final_Firework.Rectangle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _width, _height));
+        }
+    }
+    function createFireworkT(_mouseX, _mouseY, _amount, _color, _size) {
+        let color = _color;
+        let radian = (Math.PI * 2) / _amount;
+        let power = 14;
+        for (let i = 0; i < _amount; i++) {
+            let random = Math.floor(Math.random() * colors.length);
+            let velX = Math.cos(radian * i) * (Math.random() * power);
+            let velY = Math.sin(radian * i) * (Math.random() * power);
+            particles.push(new Final_Firework.Triangle(_mouseX, _mouseY, color[random], { x: velX, y: velY }, _size));
+        }
+        // ***(Bis hier hin wurde dieser Teil am 16.02.21 um 19:11 erarbeitet)***
+    }
     //Löschen der gesamten Galerie:
     async function deleteGallery(_event) {
         let response = await fetch(url + "?" + "command=deleteAll");
